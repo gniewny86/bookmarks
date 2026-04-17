@@ -9,7 +9,7 @@
    CUSTOM PROPERTIES
    ------------------------------------------------------------ */
 :root {
-  --font-base: 'Dosis', ui-sans-serif, system-ui, sans-serif;
+  --font-base: 'Raleway', ui-sans-serif, system-ui, sans-serif;
 
   --color-white:      #ffffff;
   --color-gray-50:    #f9fafb;
@@ -22,15 +22,15 @@
   --color-gray-700:   #374151;
   --color-gray-900:   #111827;
 
-  --color-blue-50:    #eff6ff;
-  --color-blue-100:   #dbeafe;
-  --color-blue-500:   #3b82f6;
-  --color-blue-600:   #2563eb;
-  --color-blue-700:   #1d4ed8;
+  --color-blue-50:    #edf3fb;
+  --color-blue-100:   #d0e2f3;
+  --color-blue-500:   #3d74b6;
+  --color-blue-600:   #3d74b6;
+  --color-blue-700:   #2f5a8e;
 
-  --color-red-50:     #fef2f2;
-  --color-red-200:    #fecaca;
-  --color-red-500:    #ef4444;
+  --color-red-50:     #fdf3f1;
+  --color-red-200:    #f0a99d;
+  --color-red-500:    #dc3c22;
 
   --color-overlay:    rgba(0, 0, 0, 0.4);
   --color-loader-bg:  rgba(255, 255, 255, 0.6);
@@ -306,13 +306,14 @@ input {
     display: block;
   }
 
+  .item-card__label {
+    font-size: 0.75rem;
+  }
+
   .item-card__label--truncate {
-    white-space: normal;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
     width: 100%;
   }
 }
