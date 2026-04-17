@@ -16,7 +16,7 @@ function UpItem({ onClick }) {
   )
 }
 
-function Item({ item, onClick, onEdit }) {
+function Item({ item, onClick, onEdit, onHover }) {
   const Icon = item.type === 'folder' ? FolderIcon : FileIcon
 
   function handleClick(e) {
@@ -29,7 +29,12 @@ function Item({ item, onClick, onEdit }) {
   }
 
   return (
-    <button onClick={handleClick} className="item-card">
+    <button
+      onClick={handleClick}
+      onMouseEnter={() => onHover(item)}
+      onMouseLeave={() => onHover(null)}
+      className="item-card"
+    >
       <Icon className="item-card__icon--mobile" />
       <Icon className="item-card__icon--desktop" />
       <span className="item-card__label item-card__label--truncate">
@@ -46,6 +51,7 @@ export default function BookmarksPage() {
   const [showAddModal, setShowAddModal] = useState(false)
   const [editingItem, setEditingItem] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
+  const [hoveredItem, setHoveredItem] = useState(null)
 
   const currentFolder = stack[stack.length - 1]
 
@@ -174,6 +180,7 @@ export default function BookmarksPage() {
                   item={item}
                   onClick={() => handleItemClick(item)}
                   onEdit={() => setEditingItem(item)}
+                  onHover={setHoveredItem}
                 />
               ))}
             </div>
@@ -194,6 +201,7 @@ export default function BookmarksPage() {
                       item={item}
                       onClick={() => handleItemClick(item)}
                       onEdit={() => setEditingItem(item)}
+                      onHover={setHoveredItem}
                     />
                   ))}
                 </div>
@@ -208,6 +216,7 @@ export default function BookmarksPage() {
                       item={item}
                       onClick={() => handleItemClick(item)}
                       onEdit={() => setEditingItem(item)}
+                      onHover={setHoveredItem}
                     />
                   ))}
                 </div>
@@ -234,6 +243,15 @@ export default function BookmarksPage() {
           onUpdated={handleUpdated}
           onDeleted={handleDeleted}
         />
+      )}
+
+      {hoveredItem && (
+        <div className="status-bar">
+          <span className="status-bar__text">
+            {hoveredItem.name}
+            {hoveredItem.url && <> · {hoveredItem.url}</>}
+          </span>
+        </div>
       )}
     </div>
   )
