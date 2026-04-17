@@ -52,6 +52,7 @@ export default function BookmarksPage() {
   const [editingItem, setEditingItem] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [hoveredItem, setHoveredItem] = useState(null)
+  const [viewMode, setViewMode] = useState('grid')
 
   const currentFolder = stack[stack.length - 1]
 
@@ -136,6 +137,26 @@ export default function BookmarksPage() {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="page__search"
           />
+          <button
+            onClick={() => setViewMode(v => v === 'grid' ? 'list' : 'grid')}
+            className="view-toggle"
+            title={viewMode === 'grid' ? 'Switch to list view' : 'Switch to grid view'}
+          >
+            {viewMode === 'grid' ? (
+              <svg viewBox="0 0 16 16" fill="currentColor">
+                <rect x="1" y="1" width="6" height="6" rx="1" />
+                <rect x="9" y="1" width="6" height="6" rx="1" />
+                <rect x="1" y="9" width="6" height="6" rx="1" />
+                <rect x="9" y="9" width="6" height="6" rx="1" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 16 16" fill="currentColor">
+                <rect x="1" y="2" width="14" height="2.5" rx="1" />
+                <rect x="1" y="6.75" width="14" height="2.5" rx="1" />
+                <rect x="1" y="11.5" width="14" height="2.5" rx="1" />
+              </svg>
+            )}
+          </button>
           <button onClick={() => setShowAddModal(true)} className="page__add-btn">
             <svg className="page__add-btn-icon" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -168,7 +189,7 @@ export default function BookmarksPage() {
         )}
       </nav>
 
-      <main className="page__content">
+      <main className="page__content" data-view={viewMode}>
         {isSearching ? (
           searchResults.length === 0 ? (
             <p className="page__empty">No results found.</p>
