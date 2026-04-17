@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { updateItem, deleteItem, isNameTakenLocally } from '../lib/bookmarks'
-import folderIcon from '../assets/folder.svg'
+import FolderIcon from '../icons/FolderIcon'
 import Loader from './Loader'
 
 export default function EditElementModal({ item, allItems, onClose, onUpdated, onDeleted }) {
@@ -81,19 +81,11 @@ export default function EditElementModal({ item, allItems, onClose, onUpdated, o
   return (
     <>
       {(saving || deleting) && <Loader />}
-      <div
-        className="fixed inset-0 bg-black/40 flex items-end justify-center z-50 md:items-center"
-        onClick={onClose}
-      >
-        <div
-          className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 mb-6 mx-4 md:mb-0 md:mx-0"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <h2 className="text-base font-semibold text-gray-900 mb-4">
-            Edit {isFile ? 'bookmark' : 'folder'}
-          </h2>
+      <div className="modal-backdrop" onClick={onClose}>
+        <div className="modal" onClick={(e) => e.stopPropagation()}>
+          <h2 className="modal__title">Edit {isFile ? 'bookmark' : 'folder'}</h2>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+          <form onSubmit={handleSubmit} className="modal__form">
             <input
               autoFocus
               type="text"
@@ -101,7 +93,7 @@ export default function EditElementModal({ item, allItems, onClose, onUpdated, o
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="modal__input"
             />
 
             {isFile && (
@@ -110,25 +102,29 @@ export default function EditElementModal({ item, allItems, onClose, onUpdated, o
                 placeholder="URL"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="modal__input"
               />
             )}
 
             {isFile && (
               <div>
-                <p className="text-xs font-medium text-gray-500 mb-1">Move to folder</p>
-                <div className="border border-gray-200 rounded-lg overflow-hidden">
+                <p className="modal__field-label">Move to folder</p>
+                <div className="folder-picker">
 
                   {/* Picker breadcrumb */}
-                  <div className="px-3 py-1.5 bg-gray-50 border-b border-gray-200 flex items-center gap-1 flex-wrap">
+                  <div className="folder-picker__breadcrumb">
                     {pickerStack.map((crumb, i) => (
-                      <span key={i} className="flex items-center gap-1">
-                        {i > 0 && <span className="text-gray-300 text-xs">/</span>}
+                      <span key={i} className="folder-picker__crumb-item">
+                        {i > 0 && <span className="folder-picker__crumb-sep">/</span>}
                         <button
                           type="button"
                           disabled={i === pickerStack.length - 1}
                           onClick={() => setPickerStack((s) => s.slice(0, i + 1))}
-                          className={`text-xs ${i === pickerStack.length - 1 ? 'font-medium text-gray-700 cursor-default' : 'cursor-pointer text-gray-500'}`}
+                          className={
+                            i === pickerStack.length - 1
+                              ? 'folder-picker__crumb-link folder-picker__crumb-link--current'
+                              : 'folder-picker__crumb-link'
+                          }
                         >
                           {crumb.name}
                         </button>
@@ -137,14 +133,14 @@ export default function EditElementModal({ item, allItems, onClose, onUpdated, o
                   </div>
 
                   {/* Folder list */}
-                  <div className="max-h-28 overflow-y-auto">
+                  <div className="folder-picker__list">
                     {pickerStack.length > 1 && (
                       <button
                         type="button"
                         onClick={() => setPickerStack((s) => s.slice(0, -1))}
-                        className="cursor-pointer w-full flex items-center gap-2 px-3 py-1.5 text-xs text-gray-600 hover:bg-gray-50"
+                        className="folder-picker__row"
                       >
-                        <img src={folderIcon} alt="" className="w-4 h-4" />
+                        <FolderIcon className="folder-picker__row-icon" />
                         ...
                       </button>
                     )}
@@ -153,21 +149,21 @@ export default function EditElementModal({ item, allItems, onClose, onUpdated, o
                         type="button"
                         key={folder.id}
                         onClick={() => setPickerStack((s) => [...s, { id: folder.id, name: folder.name }])}
-                        className="cursor-pointer w-full flex items-center gap-2 px-3 py-1.5 text-xs text-gray-600 hover:bg-gray-50"
+                        className="folder-picker__row"
                       >
-                        <img src={folderIcon} alt="" className="w-4 h-4" />
+                        <FolderIcon className="folder-picker__row-icon" />
                         {folder.name}
                       </button>
                     ))}
                     {pickerFolders.length === 0 && pickerStack.length === 1 && (
-                      <p className="text-xs text-gray-400 text-center py-2">No folders available</p>
+                      <p className="folder-picker__empty">No folders available</p>
                     )}
                   </div>
 
-                  {/* Select button */}
-                  <div className="border-t border-gray-200 px-3 py-2 flex items-center justify-between">
-                    <span className="text-xs text-gray-500">
-                      Browsing: <span className="font-medium text-gray-700">{pickerCurrent.name}</span>
+                  {/* Footer */}
+                  <div className="folder-picker__footer">
+                    <span className="folder-picker__footer-label">
+                      Browsing: <span className="folder-picker__footer-path">{pickerCurrent.name}</span>
                     </span>
                     <button
                       type="button"
@@ -176,7 +172,7 @@ export default function EditElementModal({ item, allItems, onClose, onUpdated, o
                         setSelectedParentId(pickerCurrent.id)
                         setSelectedParentName(pickerCurrent.name)
                       }}
-                      className="cursor-pointer text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded hover:bg-blue-100 disabled:opacity-40 disabled:cursor-default transition-colors"
+                      className="folder-picker__select-btn"
                     >
                       Select
                     </button>
@@ -184,27 +180,23 @@ export default function EditElementModal({ item, allItems, onClose, onUpdated, o
                 </div>
 
                 {destinationLabel && (
-                  <p className="text-xs text-gray-400 mt-1">
-                    Destination: <span className="font-medium text-gray-600">{destinationLabel}</span>
+                  <p className="modal__hint">
+                    Destination: <span className="folder-picker__footer-path">{destinationLabel}</span>
                   </p>
                 )}
               </div>
             )}
 
-            {error && <p className="text-red-500 text-xs">{error}</p>}
+            {error && <p className="modal__error">{error}</p>}
 
-            <div className="flex gap-2 mt-1">
-              <button
-                type="button"
-                onClick={onClose}
-                className="cursor-pointer flex-1 border border-gray-300 text-gray-600 rounded-lg py-2 text-[12px] font-bold uppercase hover:bg-gray-50 transition-colors"
-              >
+            <div className="modal__actions">
+              <button type="button" onClick={onClose} className="modal__btn modal__btn--cancel">
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={saving || deleting || !name.trim()}
-                className="cursor-pointer flex-1 bg-blue-600 text-white rounded-lg py-2 text-[12px] font-bold uppercase hover:bg-blue-700 disabled:opacity-50 transition-colors"
+                className="modal__btn modal__btn--submit"
               >
                 {saving ? 'Saving…' : 'Save'}
               </button>
@@ -214,7 +206,7 @@ export default function EditElementModal({ item, allItems, onClose, onUpdated, o
               type="button"
               disabled={deleting || saving}
               onClick={handleDelete}
-              className="cursor-pointer w-full border border-red-200 text-red-500 rounded-lg py-2 text-[12px] font-bold uppercase hover:bg-red-50 disabled:opacity-50 transition-colors"
+              className="modal__btn modal__btn--delete"
             >
               {deleting ? 'Deleting…' : 'Delete'}
             </button>

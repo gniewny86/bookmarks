@@ -3,26 +3,21 @@ import { getAllItems } from '../lib/bookmarks'
 import AddElementModal from '../components/AddElementModal'
 import EditElementModal from '../components/EditElementModal'
 import Loader from '../components/Loader'
-import folderIcon from '../assets/folder.svg'
-import fileIcon from '../assets/file.svg'
+import FolderIcon from '../icons/FolderIcon'
+import FileIcon from '../icons/FileIcon'
 
 function UpItem({ onClick }) {
   return (
-    <button
-      onClick={onClick}
-      className="cursor-pointer w-full text-left hover:bg-white hover:shadow-sm rounded-xl transition-all
-        flex flex-row items-center gap-3 px-3 py-2
-        md:flex-col md:items-center md:justify-center md:gap-2 md:p-3 md:text-center md:w-[102px] md:h-32"
-    >
-      <img src={folderIcon} alt="" className="w-6 h-6 shrink-0 md:hidden" />
-      <img src={folderIcon} alt="" className="w-16 h-16 hidden md:block" />
-      <span className="text-sm md:text-sm text-gray-700 leading-tight">...</span>
+    <button onClick={onClick} className="item-card">
+      <FolderIcon className="item-card__icon--mobile" />
+      <FolderIcon className="item-card__icon--desktop" />
+      <span className="item-card__label">...</span>
     </button>
   )
 }
 
 function Item({ item, onClick, onEdit }) {
-  const icon = item.type === 'folder' ? folderIcon : fileIcon
+  const Icon = item.type === 'folder' ? FolderIcon : FileIcon
 
   function handleClick(e) {
     if (e.shiftKey) {
@@ -34,15 +29,10 @@ function Item({ item, onClick, onEdit }) {
   }
 
   return (
-    <button
-      onClick={handleClick}
-      className="cursor-pointer w-full text-left hover:bg-white hover:shadow-sm rounded-xl transition-all
-        flex flex-row items-center gap-3 px-3 py-2
-        md:flex-col md:items-center md:justify-center md:gap-2 md:p-3 md:text-center md:w-[102px] md:h-32"
-    >
-      <img src={icon} alt="" className="w-6 h-6 shrink-0 md:hidden" />
-      <img src={icon} alt="" className="w-16 h-16 hidden md:block" />
-      <span className="text-sm md:text-sm text-gray-700 leading-tight truncate w-full">
+    <button onClick={handleClick} className="item-card">
+      <Icon className="item-card__icon--mobile" />
+      <Icon className="item-card__icon--desktop" />
+      <span className="item-card__label item-card__label--truncate">
         {item.name}
       </span>
     </button>
@@ -127,25 +117,21 @@ export default function BookmarksPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="page">
       {loading && <Loader />}
 
-      {/* Top bar */}
-      <header className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
-        <span className="font-semibold text-gray-900 text-base">Bookmarks</span>
-        <div className="flex items-center gap-3">
+      <header className="page__header">
+        <span className="page__title">Bookmarks</span>
+        <div className="page__controls">
           <input
             type="text"
             placeholder="Search..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="hidden md:block border border-gray-200 rounded-lg px-3 h-9 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-52"
+            className="page__search"
           />
-          <button
-            onClick={() => setShowAddModal(true)}
-            className="cursor-pointer flex items-center gap-1.5 bg-blue-600 text-white text-[12px] font-bold uppercase px-4 h-9 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+          <button onClick={() => setShowAddModal(true)} className="page__add-btn">
+            <svg className="page__add-btn-icon" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
             </svg>
             Add element
@@ -153,21 +139,20 @@ export default function BookmarksPage() {
         </div>
       </header>
 
-      {/* Breadcrumb */}
-      <nav className="px-6 py-2 flex items-center gap-1 text-sm text-gray-500">
+      <nav className="breadcrumb">
         {isSearching ? (
-          <span className="text-gray-900 font-medium">Search results:</span>
+          <span className="breadcrumb__link breadcrumb__link--current">Search results:</span>
         ) : (
           stack.map((crumb, i) => (
-            <span key={i} className="flex items-center gap-1">
-              {i > 0 && <span className="text-gray-300">/</span>}
+            <span key={i} className="breadcrumb__item">
+              {i > 0 && <span className="breadcrumb__sep">/</span>}
               <button
                 onClick={() => navigateTo(i)}
                 disabled={i === stack.length - 1}
                 className={
                   i === stack.length - 1
-                    ? 'text-gray-900 font-medium cursor-default'
-                    : 'cursor-pointer'
+                    ? 'breadcrumb__link breadcrumb__link--current'
+                    : 'breadcrumb__link'
                 }
               >
                 {crumb.name}
@@ -177,14 +162,12 @@ export default function BookmarksPage() {
         )}
       </nav>
 
-      {/* Content */}
-      <main className="flex-1 px-6 py-4">
+      <main className="page__content">
         {isSearching ? (
-          /* Global search results — all matching files, flat, no folders */
           searchResults.length === 0 ? (
-            <p className="text-center text-gray-400 text-sm mt-24">No results found.</p>
+            <p className="page__empty">No results found.</p>
           ) : (
-            <div className="grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-2">
+            <div className="item-grid--search">
               {searchResults.map((item) => (
                 <Item
                   key={item.id}
@@ -198,13 +181,10 @@ export default function BookmarksPage() {
         ) : (
           <>
             {!loading && currentItems.length === 0 && stack.length === 1 ? (
-              <p className="text-center text-gray-400 text-sm mt-24">
-                This folder is empty. Add a folder or bookmark.
-              </p>
+              <p className="page__empty">This folder is empty. Add a folder or bookmark.</p>
             ) : (
               <>
-                {/* Mobile: list */}
-                <div className="flex flex-col gap-1 md:hidden">
+                <div className="item-list">
                   {stack.length > 1 && (
                     <UpItem onClick={() => navigateTo(stack.length - 2)} />
                   )}
@@ -218,8 +198,7 @@ export default function BookmarksPage() {
                   ))}
                 </div>
 
-                {/* Desktop: grid */}
-                <div className="hidden md:grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-2">
+                <div className="item-grid">
                   {stack.length > 1 && (
                     <UpItem onClick={() => navigateTo(stack.length - 2)} />
                   )}

@@ -36,17 +36,11 @@ export default function AddElementModal({ parentId, allItems, onClose, onAdded }
   return (
     <>
       {saving && <Loader />}
-      <div
-        className="fixed inset-0 bg-black/40 flex items-end justify-center z-50 md:items-center"
-        onClick={onClose}
-      >
-        <div
-          className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 mb-6 mx-4 md:mb-0 md:mx-0"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <h2 className="text-base font-semibold text-gray-900 mb-4">Add element</h2>
+      <div className="modal-backdrop" onClick={onClose}>
+        <div className="modal" onClick={(e) => e.stopPropagation()}>
+          <h2 className="modal__title">Add element</h2>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+          <form onSubmit={handleSubmit} className="modal__form">
             <div>
               <input
                 autoFocus
@@ -55,7 +49,7 @@ export default function AddElementModal({ parentId, allItems, onClose, onAdded }
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="modal__input"
               />
             </div>
 
@@ -65,27 +59,23 @@ export default function AddElementModal({ parentId, allItems, onClose, onAdded }
                 placeholder="URL (leave empty to create a folder)"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="modal__input"
               />
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="modal__hint">
                 {type === 'folder' ? 'Will create a folder' : 'Will create a file (bookmark)'}
               </p>
             </div>
 
-            {error && <p className="text-red-500 text-xs">{error}</p>}
+            {error && <p className="modal__error">{error}</p>}
 
-            <div className="flex gap-2 mt-1">
-              <button
-                type="button"
-                onClick={onClose}
-                className="cursor-pointer flex-1 border border-gray-300 text-gray-600 rounded-lg py-2 text-[12px] font-bold uppercase hover:bg-gray-50 transition-colors"
-              >
+            <div className="modal__actions">
+              <button type="button" onClick={onClose} className="modal__btn modal__btn--cancel">
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={saving || !name.trim()}
-                className="cursor-pointer flex-1 bg-blue-600 text-white rounded-lg py-2 text-[12px] font-bold uppercase hover:bg-blue-700 disabled:opacity-50 transition-colors"
+                className="modal__btn modal__btn--submit"
               >
                 {saving ? 'Adding…' : 'Add'}
               </button>
