@@ -1,0 +1,134 @@
+[
+  {
+    "name": "AI",
+    "children": [
+      { "name": "ChatGPT mini", "url": "https://chatgpt.com/" },
+      { "name": "Copilot",      "url": "https://copilot.microsoft.com/" }
+    ]
+  },
+  {
+    "name": "Games",
+    "children": [
+      { "name": "Game deals",  "url": "https://gg.deals/pc/" },
+      { "name": "Łowcy Gier", "url": "https://lowcygier.pl/" }
+    ]
+  },
+  {
+    "name": "Google",
+    "children": [
+      { "name": "Google Mail",      "url": "https://accounts.google.com/v3/signin/identifier?dsh=S-116694062%3A1685361995965147&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&ifkv=Af_xneGvB34EJGZK2qo0pjTqOwcikjD3WgXe99Mi93H173sgXQCgwOmzhIFa-G73NDMkrCMSL4YLNQ&rip=1&sacu=1&service=mail&flowName=GlifWebSignIn&flowEntry=ServiceLogin" },
+      { "name": "Google Maps",      "url": "https://www.google.com/maps" },
+      { "name": "Google Translate", "url": "https://translate.google.com/" },
+      { "name": "YouTube",          "url": "https://www.youtube.com/" }
+    ]
+  },
+  {
+    "name": "Movies",
+    "children": [
+      { "name": "Filmweb",     "url": "https://www.filmweb.pl/" },
+      { "name": "TV Calendar", "url": "https://www.pogdesign.co.uk/cat/login" }
+    ]
+  },
+  {
+    "name": "Music",
+    "children": [
+      { "name": "SoundCloud", "url": "https://soundcloud.com/" },
+      { "name": "Spotify",    "url": "https://open.spotify.com/" }
+    ]
+  },
+  {
+    "name": "News",
+    "children": [
+      { "name": "Antyweb",      "url": "https://antyweb.pl/" },
+      { "name": "Spider's Web", "url": "https://spidersweb.pl/" }
+    ]
+  },
+  {
+    "name": "Shops",
+    "children": [
+      { "name": "Allegro", "url": "https://allegro.pl/" },
+      { "name": "OLX",     "url": "https://www.olx.pl/" }
+    ]
+  },
+  {
+    "name": "Social",
+    "children": [
+      { "name": "Facebook",  "url": "https://pl-pl.facebook.com/" },
+      { "name": "Instagram", "url": "https://www.instagram.com/" },
+      { "name": "LinkedIn",  "url": "https://pl.linkedin.com/" },
+      { "name": "Pinterest", "url": "https://pl.pinterest.com/" }
+    ]
+  },
+  {
+    "name": "Stream",
+    "children": [
+      { "name": "Jadisco",        "url": "https://jadisco.pl/" },
+      { "name": "Pancernik",      "url": "https://pancernik.info/" },
+      { "name": "Twitch - Bonkol", "url": "https://www.twitch.tv/bonkol" },
+      { "name": "Twitch - Indy",  "url": "https://www.twitch.tv/indystarcraft" },
+      { "name": "Twitch - Rysław", "url": "https://www.twitch.tv/ryslawlive" }
+    ]
+  },
+  {
+    "name": "Temp",
+    "children": [
+      { "name": "FMHY", "url": "https://fmhy.pages.dev/" }
+    ]
+  },
+  {
+    "name": "Tools",
+    "children": [
+      { "name": "E-Ink",        "url": "https://e-ink.me/en" },
+      { "name": "Excalidraw",   "url": "https://excalidraw.com/" },
+      { "name": "Win11Debloat", "url": "https://github.com/Raphire/Win11Debloat?tab=readme-ov-file" }
+    ]
+  },
+  {
+    "name": "VOD",
+    "children": [
+      { "name": "Amazon Prime", "url": "https://www.primevideo.com/offers/nonprimehomepage/ref=dv_web_force_root" },
+      { "name": "Canal+",       "url": "https://www.canalplus.com/pl/" },
+      { "name": "HBO Max",      "url": "https://play.hbomax.com/signIn" },
+      { "name": "Netflix",      "url": "https://www.netflix.com/pl/login" }
+    ]
+  },
+  {
+    "name": "Work",
+    "children": [
+      { "name": "Code Sandbox", "url": "https://codesandbox.io/signin?utm_source=landingpage" },
+      { "name": "CSS-to-JS",    "url": "https://transform.tools/css-to-js" }
+    ]
+  },
+  { "name": "Wykop", "url": "https://wykop.pl/" },
+  {
+    "name": "YouTube",
+    "children": [
+      { "name": "Adam Śmiałek",         "url": "https://www.youtube.com/c/Adam%C5%9Amia%C5%82ek/videos" },
+      { "name": "arhn.eu",              "url": "https://www.youtube.com/@arhneu/videos" },
+      { "name": "Astrofaza",            "url": "https://www.youtube.com/@Astrofaza/videos" },
+      { "name": "GOTRI",                "url": "https://www.youtube.com/@GOTRI98/videos" },
+      { "name": "Grzegorz Bobrek",      "url": "https://www.youtube.com/@GrzegorzBobrek/videos" },
+      { "name": "Historia bez cenzury", "url": "https://www.youtube.com/@HistoriaBezCenzuryMB/videos" },
+      { "name": "Hubert Cupak",         "url": "https://www.youtube.com/@HubertCupak/videos" },
+      { "name": "Kacper Pitala",        "url": "https://www.youtube.com/@KacperPitala/videos" },
+      { "name": "Książulo",             "url": "https://www.youtube.com/@ksiazulo/videos" },
+      { "name": "Kuba Klawiter",        "url": "https://www.youtube.com/@KubaKlawiter/videos" },
+      { "name": "Lekko Stronniczy",     "url": "https://www.youtube.com/@lekkostronniczy/videos" },
+      { "name": "Mario Budowlaniec",    "url": "https://www.youtube.com/@mariobudowlaniec/videos" },
+      { "name": "Michał Pisarski",      "url": "https://www.youtube.com/@MichaPisarskiTech/videos" },
+      { "name": "MotoBieda",            "url": "https://www.youtube.com/@MotoBieda/videos" },
+      { "name": "Na Gałęzi",            "url": "https://www.youtube.com/@NaGalezi/videos" },
+      { "name": "Nauka. To lubię",      "url": "https://www.youtube.com/@naukatolubie/videos" },
+      { "name": "Quaz",                 "url": "https://www.youtube.com/@quaz9/videos" },
+      { "name": "Robert Makłowicz",     "url": "https://www.youtube.com/@Robert_Maklowicz/videos" },
+      { "name": "Smartgasm",            "url": "https://www.youtube.com/@Smartgasm/videos" },
+      { "name": "Spinka (Walaszek)",    "url": "https://www.youtube.com/@Spinkafilmstudio/videos" },
+      { "name": "Stilgar",              "url": "https://www.youtube.com/@Stilgarius/videos" },
+      { "name": "To znowu oni",         "url": "https://www.youtube.com/@ToZnowuOni/videos" },
+      { "name": "Uwaga! Naukowy Bełkot", "url": "https://www.youtube.com/@naukowy.belkot/videos" },
+      { "name": "Wazzup",               "url": "https://www.youtube.com/@wazzup1979/videos" },
+      { "name": "Zmaslo 1",             "url": "https://www.youtube.com/@ZMASLO/videos" },
+      { "name": "Zmaslo 2",             "url": "https://www.youtube.com/@Rozpaczkowanie/videos" }
+    ]
+  }
+]
