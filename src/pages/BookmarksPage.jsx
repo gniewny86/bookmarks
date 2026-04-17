@@ -5,6 +5,7 @@ import EditElementModal from '../components/EditElementModal'
 import Loader from '../components/Loader'
 import FolderIcon from '../icons/FolderIcon'
 import FileIcon from '../icons/FileIcon'
+import BookmarkIcon from '../icons/BookmarkIcon'
 
 function UpItem({ onClick }) {
   return (
@@ -128,7 +129,10 @@ export default function BookmarksPage() {
       {loading && <Loader />}
 
       <header className="page__header">
-        <span className="page__title">Bookmarks</span>
+        <span className="page__title">
+          <BookmarkIcon className="page__title-icon" />
+          Bookmarks
+        </span>
         <div className="page__controls">
           <input
             type="text"
