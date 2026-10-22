@@ -1,0 +1,12 @@
+{
+  "name": "@bookmarks/firebase",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "dependencies": {
+    "firebase": "^12.12.0"
+  }
+}

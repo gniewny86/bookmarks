@@ -1,11 +1,10 @@
 import { useState, useEffect, useMemo } from 'react'
-import { getAllItems } from '../lib/bookmarks'
-import AddElementModal from '../components/AddElementModal'
-import EditElementModal from '../components/EditElementModal'
-import Loader from '../components/Loader'
-import FolderIcon from '../icons/FolderIcon'
-import FileIcon from '../icons/FileIcon'
-import BookmarkIcon from '../icons/BookmarkIcon'
+import { Loader, PageHeader } from '@bookmarks/ui'
+import { BookmarkIcon, FileIcon, FolderIcon } from '@bookmarks/assets'
+import { getAllItems } from './lib/bookmarks'
+import AddElementModal from './components/AddElementModal'
+import EditElementModal from './components/EditElementModal'
+import './styles.css'
 
 function UpItem({ onClick }) {
   return (
@@ -128,47 +127,16 @@ export default function BookmarksPage() {
     <div className="page">
       {loading && <Loader />}
 
-      <header className="page__header">
-        <span className="page__title">
-          <BookmarkIcon className="page__title-icon" />
-          Bookmarks
-        </span>
-        <div className="page__controls">
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="page__search"
-          />
-          <button
-            onClick={() => setViewMode(v => v === 'grid' ? 'list' : 'grid')}
-            className="view-toggle"
-            title={viewMode === 'grid' ? 'Switch to list view' : 'Switch to grid view'}
-          >
-            {viewMode === 'grid' ? (
-              <svg viewBox="0 0 16 16" fill="currentColor">
-                <rect x="1" y="1" width="6" height="6" rx="1" />
-                <rect x="9" y="1" width="6" height="6" rx="1" />
-                <rect x="1" y="9" width="6" height="6" rx="1" />
-                <rect x="9" y="9" width="6" height="6" rx="1" />
-              </svg>
-            ) : (
-              <svg viewBox="0 0 16 16" fill="currentColor">
-                <rect x="1" y="2" width="14" height="2.5" rx="1" />
-                <rect x="1" y="6.75" width="14" height="2.5" rx="1" />
-                <rect x="1" y="11.5" width="14" height="2.5" rx="1" />
-              </svg>
-            )}
-          </button>
-          <button onClick={() => setShowAddModal(true)} className="page__add-btn">
-            <svg className="page__add-btn-icon" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-            </svg>
-            Add element
-          </button>
-        </div>
-      </header>
+      <PageHeader
+        title="Bookmarks"
+        icon={BookmarkIcon}
+        searchValue={searchQuery}
+        onSearchChange={setSearchQuery}
+        viewMode={viewMode}
+        onViewToggle={() => setViewMode((v) => (v === 'grid' ? 'list' : 'grid'))}
+        addLabel="Add element"
+        onAdd={() => setShowAddModal(true)}
+      />
 
       <nav className="breadcrumb">
         {isSearching ? (

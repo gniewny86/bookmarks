@@ -1,0 +1,322 @@
+/* ============================================================
+   BOOKMARKS MODULE
+   Breadcrumb · items · folder picker · status bar
+   ============================================================ */
+
+/* Breadcrumb ------------------------------------------------- */
+.breadcrumb {
+  padding: 0.625rem 1.5rem;
+  border-bottom: 1px solid var(--color-gray-200);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--color-gray-500);
+}
+
+.breadcrumb__item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.breadcrumb__sep {
+  color: var(--color-gray-300);
+}
+
+.breadcrumb__link {
+  font-size: inherit;
+  color: var(--color-gray-500);
+  cursor: pointer;
+  padding: 0;
+  transition: var(--transition-colors);
+}
+
+.breadcrumb__link:hover {
+  color: var(--color-gray-700);
+}
+
+.breadcrumb__link--current {
+  color: var(--color-gray-900);
+  font-weight: 500;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Content ---------------------------------------------------- */
+.page__empty {
+  text-align: center;
+  color: var(--color-gray-400);
+  font-size: 0.875rem;
+  margin-top: 6rem;
+}
+
+/* Item containers ------------------------------------------- */
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.item-grid {
+  display: none;
+}
+
+.item-grid--search {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.5rem;
+}
+
+/* ------------------------------------------------------------
+   ITEM CARD
+   ------------------------------------------------------------ */
+.item-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  background: transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-all);
+}
+
+.item-card:hover {
+  background-color: var(--color-white);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+}
+
+.item-card__icon--mobile {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+.item-card__icon--desktop {
+  display: none;
+  width: 4rem;
+  height: 4rem;
+}
+
+.item-card__label {
+  font-size: 0.875rem;
+  color: var(--color-gray-700);
+  line-height: 1.25;
+}
+
+.item-card__label--truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+/* ------------------------------------------------------------
+   RESPONSIVE — md (768px)
+   ------------------------------------------------------------ */
+@media (min-width: 768px) {
+  /* Grid view */
+  .page__content[data-view="grid"] .item-list {
+    display: none;
+  }
+
+  .page__content[data-view="grid"] .item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .page__content[data-view="grid"] .item-card {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    text-align: center;
+    width: 6.375rem;
+    height: 8rem;
+  }
+
+  .page__content[data-view="grid"] .item-card__icon--mobile {
+    display: none;
+  }
+
+  .page__content[data-view="grid"] .item-card__icon--desktop {
+    display: block;
+  }
+
+  .page__content[data-view="grid"] .item-card__label {
+    font-size: 0.75rem;
+  }
+
+  .page__content[data-view="grid"] .item-card__label--truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
+
+  /* List view */
+  .page__content[data-view="list"] .item-list {
+    display: flex;
+  }
+
+  .page__content[data-view="list"] .item-grid {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------
+   FOLDER PICKER
+   ------------------------------------------------------------ */
+.folder-picker {
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.folder-picker__breadcrumb {
+  padding: 0.375rem 0.75rem;
+  background-color: var(--color-gray-50);
+  border-bottom: 1px solid var(--color-gray-200);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.folder-picker__crumb-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.folder-picker__crumb-sep {
+  color: var(--color-gray-300);
+  font-size: 0.75rem;
+}
+
+.folder-picker__crumb-link {
+  font-size: 0.75rem;
+  color: var(--color-gray-500);
+  cursor: pointer;
+  padding: 0;
+  transition: var(--transition-colors);
+}
+
+.folder-picker__crumb-link:hover {
+  color: var(--color-gray-700);
+}
+
+.folder-picker__crumb-link--current {
+  font-weight: 500;
+  color: var(--color-gray-700);
+  cursor: default;
+  pointer-events: none;
+}
+
+.folder-picker__list {
+  max-height: 7rem;
+  overflow-y: auto;
+}
+
+.folder-picker__row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--color-gray-600);
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition-colors);
+}
+
+.folder-picker__row:hover {
+  background-color: var(--color-gray-50);
+}
+
+.folder-picker__row-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.folder-picker__empty {
+  font-size: 0.75rem;
+  color: var(--color-gray-400);
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.folder-picker__footer {
+  border-top: 1px solid var(--color-gray-200);
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.folder-picker__footer-label {
+  font-size: 0.75rem;
+  color: var(--color-gray-500);
+}
+
+.folder-picker__footer-path {
+  font-weight: 500;
+  color: var(--color-gray-700);
+}
+
+.folder-picker__select-btn {
+  font-size: 0.75rem;
+  background-color: var(--color-blue-50);
+  color: var(--color-blue-600);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: var(--transition-colors);
+}
+
+.folder-picker__select-btn:hover:not(:disabled) {
+  background-color: var(--color-blue-100);
+}
+
+.folder-picker__select-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* ------------------------------------------------------------
+   STATUS BAR
+   ------------------------------------------------------------ */
+.status-bar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .status-bar {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-white);
+    border-top: 1px solid var(--color-gray-200);
+    padding: 0.25rem 1rem;
+    z-index: 40;
+  }
+
+  .status-bar__text {
+    font-size: 0.75rem;
+    color: var(--color-gray-500);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
+}

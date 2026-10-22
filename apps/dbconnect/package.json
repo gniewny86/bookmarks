@@ -1,0 +1,17 @@
+{
+  "name": "@bookmarks/app-dbconnect",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "dependencies": {
+    "@bookmarks/app-bookmarks": "*",
+    "@bookmarks/app-calendar": "*",
+    "@bookmarks/assets": "*",
+    "@bookmarks/ui": "*",
+    "firebase": "^12.12.0",
+    "react": "^19.2.4"
+  }
+}

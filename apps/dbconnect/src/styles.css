@@ -1,0 +1,147 @@
+/* ============================================================
+   DBCONNECT MODULE
+   Per-module JSON dump + seed (replace) of Firestore collections
+   ============================================================ */
+
+.dbconnect {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 52rem;
+}
+
+/* Row ------------------------------------------------------- */
+.db-row {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+}
+
+.db-row__head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.db-row__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-gray-900);
+}
+
+.db-row__meta {
+  font-size: 0.8125rem;
+  color: var(--color-gray-500);
+  margin-top: 0.25rem;
+}
+
+.db-row__meta code,
+.db-row__confirm-text code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.75rem;
+  background-color: var(--color-gray-100);
+  border-radius: var(--radius-sm);
+  padding: 0.0625rem 0.25rem;
+}
+
+.db-row__actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.db-row__file {
+  display: none;
+}
+
+/* Buttons ---------------------------------------------------- */
+.db-btn {
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.875rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: var(--transition-colors);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.db-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.db-btn--primary {
+  background-color: var(--color-blue-600);
+  color: var(--color-white);
+}
+
+.db-btn--primary:hover:not(:disabled) {
+  background-color: var(--color-blue-700);
+}
+
+.db-btn--secondary,
+.db-btn--ghost {
+  border-color: var(--color-gray-300);
+  color: var(--color-gray-600);
+  background-color: transparent;
+}
+
+.db-btn--secondary:hover:not(:disabled),
+.db-btn--ghost:hover:not(:disabled) {
+  background-color: var(--color-gray-50);
+}
+
+.db-btn--danger {
+  background-color: var(--color-red-500);
+  color: var(--color-white);
+}
+
+.db-btn--danger:hover:not(:disabled) {
+  background-color: var(--color-red-200);
+}
+
+/* Confirmation + messages ----------------------------------- */
+.db-row__confirm {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-gray-50);
+}
+
+.db-row__confirm-text {
+  font-size: 0.8125rem;
+  color: var(--color-gray-700);
+}
+
+.db-row__confirm-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.db-row__message {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+}
+
+.db-row__message--success {
+  color: var(--color-blue-700);
+}
+
+.db-row__message--error {
+  color: var(--color-red-500);
+}
+
+@media (min-width: 768px) {
+  .db-row__head {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+}

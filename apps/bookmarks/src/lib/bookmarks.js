@@ -7,7 +7,7 @@ import {
   getDocs,
   serverTimestamp,
 } from 'firebase/firestore'
-import { db } from './firebase'
+import { db } from '@bookmarks/firebase'
 
 const ITEMS = 'items'
 

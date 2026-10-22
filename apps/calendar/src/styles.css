@@ -1,0 +1,191 @@
+/* ============================================================
+   CALENDAR MODULE
+   Event groups by month · neutral tag chips
+   ============================================================ */
+
+.event-months {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 52rem;
+}
+
+.event-month__label {
+  /* 2× the .event-card__date size */
+  font-size: calc(0.8125rem * 2);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-gray-500);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 0.75rem;
+}
+
+.event-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.event-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  width: 100%;
+  padding: 0.625rem 1rem;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition-colors);
+}
+
+.event-card:hover {
+  border-color: var(--color-gray-300);
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.06);
+}
+
+.event-card:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.event-card__date {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-gray-500);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.event-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+/* Tag chip — neutral; tag text comes from the seed already lowercased. */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1875rem 0.625rem;
+  border-radius: 0.375rem;
+  border: 1px solid var(--color-gray-200);
+  background-color: var(--color-gray-100);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--color-gray-600);
+  white-space: nowrap;
+}
+
+.event-empty {
+  text-align: center;
+  color: var(--color-gray-400);
+  font-size: 0.875rem;
+  margin-top: 6rem;
+}
+
+/* Edit-event modal ------------------------------------------- */
+.event-modal__tag-form {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.event-modal__tag-form .modal__input {
+  flex: 1;
+  min-width: 0;
+}
+
+.event-modal__add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-blue-600);
+  color: var(--color-white);
+  cursor: pointer;
+  transition: var(--transition-colors);
+}
+
+.event-modal__add:hover:not(:disabled) {
+  background-color: var(--color-blue-700);
+}
+
+.event-modal__add:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.event-modal__add-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.event-modal__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.tag--removable {
+  gap: 0.125rem;
+  padding-right: 0.25rem;
+}
+
+.tag__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  border-radius: var(--radius-full);
+  color: var(--color-gray-400);
+  cursor: pointer;
+  transition: var(--transition-colors);
+}
+
+.tag__remove:hover {
+  background-color: var(--color-gray-200);
+  color: var(--color-gray-700);
+}
+
+.tag__remove:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.tag__remove-icon {
+  width: 0.625rem;
+  height: 0.625rem;
+}
+
+.event-modal__duplicate {
+  width: 100%;
+  border: 1px solid var(--color-gray-300);
+  color: var(--color-gray-600);
+  background: transparent;
+}
+
+.event-modal__duplicate:hover {
+  background-color: var(--color-gray-50);
+}
+
+@media (min-width: 768px) {
+  .event-card {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .event-card__date {
+    flex-shrink: 0;
+    width: 6.5rem;
+  }
+}
