@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import ApplicationPicker from './ApplicationPicker.jsx'
+
 export default function PageHeader({
   title,
   icon: Icon,
@@ -6,14 +9,23 @@ export default function PageHeader({
   viewMode,
   onViewToggle,
   addLabel,
+  addIcon: AddIcon,
   onAdd,
 }) {
+  const [showApplications, setShowApplications] = useState(false)
+
   return (
     <header className="page__header">
-      <span className="page__title">
+      <button
+        type="button"
+        className="page__title"
+        aria-haspopup="dialog"
+        aria-expanded={showApplications}
+        onClick={() => setShowApplications(true)}
+      >
         {Icon && <Icon className="page__title-icon" />}
         {title}
-      </span>
+      </button>
       <div className="page__controls">
         {onSearchChange && (
           <input
@@ -48,13 +60,14 @@ export default function PageHeader({
         )}
         {onAdd && (
           <button onClick={onAdd} className="page__add-btn">
-            <svg className="page__add-btn-icon" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            {AddIcon ? <AddIcon className="page__add-btn-icon" /> : <svg className="page__add-btn-icon" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-            </svg>
+            </svg>}
             {addLabel}
           </button>
         )}
       </div>
+      {showApplications && <ApplicationPicker onClose={() => setShowApplications(false)} />}
     </header>
   )
 }

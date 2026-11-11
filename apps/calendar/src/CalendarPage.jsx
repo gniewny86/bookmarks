@@ -12,6 +12,14 @@ export default function CalendarPage() {
   const [loading, setLoading] = useState(true)
   const [loadError, setLoadError] = useState('')
   const [editingEvent, setEditingEvent] = useState(null)
+  const [toast, setToast] = useState(null)
+
+  useEffect(() => {
+    if (!toast) return
+
+    const timeout = window.setTimeout(() => setToast(null), 4000)
+    return () => window.clearTimeout(timeout)
+  }, [toast])
 
   useEffect(() => {
     let active = true
@@ -58,12 +66,16 @@ export default function CalendarPage() {
     }
 
     setEditingEvent(null)
+    if (updatedEvent.id === null) {
+      setToast({ message: 'Event added.' })
+    }
   }
 
   async function handleDelete(eventId) {
     await deleteEvent(eventId)
     setEvents((current) => current.filter((event) => event.id !== eventId))
     setEditingEvent(null)
+    setToast({ message: 'Event deleted.' })
   }
 
   async function handleDuplicate(source) {
@@ -74,6 +86,7 @@ export default function CalendarPage() {
 
     setEvents((current) => [...current, created])
     setEditingEvent(null)
+    setToast({ message: 'Event added.' })
   }
 
   return (
@@ -129,6 +142,9 @@ export default function CalendarPage() {
           </div>
         )}
       </main>
+      <div className="calendar-status" role="status" aria-atomic="true">
+        {toast && <p className="calendar-status__text">{toast.message}</p>}
+      </div>
 
       {editingEvent && (
         <EventModal

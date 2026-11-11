@@ -1,6 +1,7 @@
 import BookmarksPage from '@bookmarks/app-bookmarks'
 import CalendarPage from '@bookmarks/app-calendar'
 import DbConnectPage from '@bookmarks/app-dbconnect'
+import PasswordsPage from '@bookmarks/app-passwords'
 
 /**
  * Module registry. Every module is reachable only through its URL,
@@ -10,6 +11,7 @@ const MODULES = {
   '/bookmarks': BookmarksPage,
   '/calendar': CalendarPage,
   '/dbconnect': DbConnectPage,
+  '/passwords': PasswordsPage,
 }
 
 const DEFAULT_PATH = '/bookmarks'
@@ -56,6 +58,8 @@ export default function App() {
           <a href={`${BASE}/calendar`}>/calendar</a>
           {' · '}
           <a href={`${BASE}/dbconnect`}>/dbconnect</a>
+          {' · '}
+          <a href={`${BASE}/passwords`}>/passwords</a>
         </p>
       </div>
     )

@@ -16,7 +16,9 @@ Public bookmark manager plus sibling modules, built as an npm workspaces monorep
 │   │   └── src/
 │   ├── calendar/           # module 2 — event calendar
 │   │   └── src/
-│   └── dbconnect/          # module 3 — backup & restore tool
+│   ├── dbconnect/          # module 3 — backup & restore tool
+│   │   └── src/
+│   └── passwords/          # module 4 — local password generator
 │       └── src/
 ├── packages/
 │   ├── assets/             # shared icons + static files (public/)
@@ -29,7 +31,7 @@ Public bookmark manager plus sibling modules, built as an npm workspaces monorep
 
 - **Host** (`src/`) is the only Vite app. It owns the module registry and URL resolution.
 - **`apps/*`** are feature modules. Each exposes a page component from `src/index.js`
-  and owns its Firestore collection.
+  and, when needed, owns its Firestore collection.
 - **`packages/*`** are shared libraries consumed by the host and modules:
   - `@bookmarks/ui` — `PageHeader`, `Loader`, `Modal`, design tokens, base reset, page/header and modal/loader CSS.
   - `@bookmarks/assets` — `FolderIcon`, `FileIcon`, `BookmarkIcon`, favicon, touch icon, `.htaccess`.
@@ -37,13 +39,14 @@ Public bookmark manager plus sibling modules, built as an npm workspaces monorep
 
 ## Routing
 
-Modules are reachable **only via URL** — there is no in-app module switcher:
+Modules are reachable via URL or the application picker opened by clicking the header title:
 
 | URL | Module |
 | --- | --- |
 | `/bookmarks` | bookmark manager |
 | `/calendar` | event calendar |
 | `/dbconnect` | backup & restore (dump / seed) |
+| `/passwords` | local password generator |
 
 `/` redirects to `/bookmarks`. Unknown paths render a minimal 404.
 
@@ -60,7 +63,8 @@ npm run lint      # ESLint across the monorepo
 
 ## Databases
 
-Each module owns its own Firestore collection and reads/writes it directly.
+Data-backed modules own their Firestore collections and read/write them directly.
+Passwords are generated locally with Web Crypto and are never stored or sent to Firestore.
 
 | Module | Collection | Read / write layer |
 | --- | --- | --- |
